@@ -97,8 +97,8 @@ const App: React.FC = () => {
 
   const runSimulation = async () => {
     if (isSimulating && status === GameStatus.PLAYING) {
-        setIsPaused(false);
-        return;
+      setIsPaused(false);
+      return;
     }
 
     setIsSimulating(true);
@@ -116,7 +116,7 @@ const App: React.FC = () => {
       }
 
       await new Promise((resolve) => setTimeout(resolve, 100));
-      
+
       const prevP1 = currentHistory[currentHistory.length - 1].player1Value;
       const prevP2 = currentHistory[currentHistory.length - 1].player2Value;
 
@@ -144,7 +144,7 @@ const App: React.FC = () => {
     setIsAiLoading(true);
     const lastPoint = currentHistory[currentHistory.length - 1];
     const text = await getGameCommentary(
-      maxTurns, lastPoint.player1Value, lastPoint.player2Value, 
+      maxTurns, lastPoint.player1Value, lastPoint.player2Value,
       p1Weight, p2Weight, p1Name, p2Name
     );
     setCommentary(text);
@@ -179,18 +179,18 @@ const App: React.FC = () => {
           <div className="bg-[#121212] border-2 border-stone-800 p-5 rounded-2xl shadow-xl hover:border-blue-900/50 transition-colors">
             <div className="mb-4">
               <label className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1 block">CONTENDER ONE</label>
-              <input 
-                type="text" 
-                value={p1Name} 
+              <input
+                type="text"
+                value={p1Name}
                 onChange={(e) => setP1Name(e.target.value.toUpperCase())}
                 disabled={status !== GameStatus.IDLE}
                 className="w-full bg-black/40 border-b border-stone-700 p-2 text-white font-bold focus:border-blue-500 focus:outline-none disabled:opacity-50 text-sm"
               />
             </div>
-            <WeightSlider 
-              label="BET MULTIPLIER" 
-              value={p1Weight} 
-              onChange={setP1Weight} 
+            <WeightSlider
+              label="BET MULTIPLIER"
+              value={p1Weight}
+              onChange={setP1Weight}
               color="#3b82f6"
               disabled={status !== GameStatus.IDLE}
             />
@@ -204,18 +204,18 @@ const App: React.FC = () => {
           <div className="bg-[#121212] border-2 border-stone-800 p-5 rounded-2xl shadow-xl hover:border-red-900/50 transition-colors">
             <div className="mb-4">
               <label className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-1 block">CONTENDER TWO</label>
-              <input 
-                type="text" 
-                value={p2Name} 
+              <input
+                type="text"
+                value={p2Name}
                 onChange={(e) => setP2Name(e.target.value.toUpperCase())}
                 disabled={status !== GameStatus.IDLE}
                 className="w-full bg-black/40 border-b border-stone-700 p-2 text-white font-bold focus:border-red-500 focus:outline-none disabled:opacity-50 text-sm"
               />
             </div>
-            <WeightSlider 
-              label="BET MULTIPLIER" 
-              value={p2Weight} 
-              onChange={setP2Weight} 
+            <WeightSlider
+              label="BET MULTIPLIER"
+              value={p2Weight}
+              onChange={setP2Weight}
               color="#ef4444"
               disabled={status !== GameStatus.IDLE}
             />
@@ -247,22 +247,22 @@ const App: React.FC = () => {
               <div className="flex flex-col">
                 <span className="text-[10px] text-stone-500 font-black uppercase tracking-widest mb-1">CURRENT TURN</span>
                 <span className="text-5xl font-black text-stone-200 leading-none tabular-nums">
-                    {turn.toString().padStart(2, '0')}<span className="text-stone-700 mx-1">/</span>{maxTurns.toString().padStart(2, '0')}
+                  {turn.toString().padStart(2, '0')}<span className="text-stone-700 mx-1">/</span>{maxTurns.toString().padStart(2, '0')}
                 </span>
               </div>
               <div className="flex flex-col">
                 <label className="text-[10px] text-stone-500 font-black uppercase tracking-widest mb-1">TOTAL ROUNDS</label>
-                <input 
-                   type="number"
-                   value={maxTurnsInput} 
-                   onChange={(e) => setMaxTurnsInput(e.target.value)}
-                   onBlur={() => {
-                     const v = parseInt(maxTurnsInput);
-                     if (isNaN(v) || v < 1) setMaxTurnsInput("1");
-                     if (v > 100) setMaxTurnsInput("100");
-                   }}
-                   disabled={status !== GameStatus.IDLE}
-                   className="bg-black border border-stone-700 rounded-xl py-3 px-4 w-24 font-black text-white focus:border-yellow-600 focus:outline-none transition-all disabled:opacity-50 text-2xl text-center"
+                <input
+                  type="number"
+                  value={maxTurnsInput}
+                  onChange={(e) => setMaxTurnsInput(e.target.value)}
+                  onBlur={() => {
+                    const v = parseInt(maxTurnsInput);
+                    if (isNaN(v) || v < 1) setMaxTurnsInput("1");
+                    if (v > 100) setMaxTurnsInput("100");
+                  }}
+                  disabled={status !== GameStatus.IDLE}
+                  className="bg-black border border-stone-700 rounded-xl py-3 px-4 w-24 font-black text-white focus:border-yellow-600 focus:outline-none transition-all disabled:opacity-50 text-2xl text-center"
                 />
               </div>
             </div>
@@ -277,18 +277,18 @@ const App: React.FC = () => {
                 </button>
               ) : status === GameStatus.PLAYING ? (
                 <div className="flex gap-3">
-                    <button
-                      onClick={() => setIsPaused(!isPaused)}
-                      className={`px-8 py-5 border-2 ${isPaused ? 'border-emerald-600 text-emerald-500' : 'border-stone-700 text-stone-400'} font-black rounded-2xl transition-all active:scale-95 text-lg`}
-                    >
-                      {isPaused ? 'RESUME' : 'PAUSE'}
-                    </button>
-                    <button
-                        onClick={resetGame}
-                        className="px-8 py-5 bg-stone-800 text-stone-300 font-black rounded-2xl transition-all active:scale-95 text-lg"
-                    >
-                        QUIT
-                    </button>
+                  <button
+                    onClick={() => setIsPaused(!isPaused)}
+                    className={`px-8 py-5 border-2 ${isPaused ? 'border-emerald-600 text-emerald-500' : 'border-stone-700 text-stone-400'} font-black rounded-2xl transition-all active:scale-95 text-lg`}
+                  >
+                    {isPaused ? 'RESUME' : 'PAUSE'}
+                  </button>
+                  <button
+                    onClick={resetGame}
+                    className="px-8 py-5 bg-stone-800 text-stone-300 font-black rounded-2xl transition-all active:scale-95 text-lg"
+                  >
+                    QUIT
+                  </button>
                 </div>
               ) : (
                 <button
@@ -303,13 +303,12 @@ const App: React.FC = () => {
 
           {/* Result Banner */}
           {status === GameStatus.FINISHED && !isSimulating && (
-            <div className={`p-10 rounded-3xl border-4 text-center animate-bounce transition-all ${
-                p1Score > p2Score 
-                ? 'bg-blue-900/10 border-blue-500 text-blue-100 shadow-[0_0_30px_rgba(59,130,246,0.2)]' 
-                : p2Score > p1Score 
-                ? 'bg-red-900/10 border-red-500 text-red-100 shadow-[0_0_30px_rgba(239,68,68,0.2)]' 
-                : 'bg-stone-900/10 border-stone-500 text-stone-100'
-            }`}>
+            <div className={`p-10 rounded-3xl border-4 text-center animate-bounce transition-all ${p1Score > p2Score
+                ? 'bg-blue-900/10 border-blue-500 text-blue-100 shadow-[0_0_30px_rgba(59,130,246,0.2)]'
+                : p2Score > p1Score
+                  ? 'bg-red-900/10 border-red-500 text-red-100 shadow-[0_0_30px_rgba(239,68,68,0.2)]'
+                  : 'bg-stone-900/10 border-stone-500 text-stone-100'
+              }`}>
               <h2 className="text-5xl font-black mb-2 uppercase tracking-tight">
                 {p1Score > p2Score ? `${p1Name} IS BADA!` : p2Score > p1Score ? `${p2Name} IS BADA!` : "IT'S A TIE!"}
               </h2>
@@ -323,14 +322,14 @@ const App: React.FC = () => {
 
       <footer className="mt-20 w-full text-center text-stone-600 text-[10px] font-black tracking-[0.4em] border-t border-stone-900 pt-10 pb-20 uppercase">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto mb-12">
-            <div>
-                <h4 className="text-stone-500 mb-3">CONVERGENCE MATH</h4>
-                <p className="normal-case tracking-normal font-medium opacity-60">Trailing contenders gain statistical momentum to ensure photo finishes.</p>
-            </div>
-            <div>
-                <h4 className="text-stone-500 mb-3">WAVY INTERPOLATION</h4>
-                <p className="normal-case tracking-normal font-medium opacity-60">Smooth visualizations optimized for real-time magnitude trajectory tracking.</p>
-            </div>
+          <div>
+            <h4 className="text-stone-500 mb-3">CONVERGENCE MATH</h4>
+            <p className="normal-case tracking-normal font-medium opacity-60">Trailing contenders gain statistical momentum to ensure photo finishes.</p>
+          </div>
+          <div>
+            <h4 className="text-stone-500 mb-3">WAVY INTERPOLATION</h4>
+            <p className="normal-case tracking-normal font-medium opacity-60">Smooth visualizations optimized for real-time magnitude trajectory tracking.</p>
+          </div>
         </div>
         <p>© 2025 KISKA ZYAADA BADA </p>
       </footer>
